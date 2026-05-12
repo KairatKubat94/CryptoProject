@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Визуализатор Алгоритмов Шифрования</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <!-- Заголовок -->
+        <header class="header">
+            <h1>🔐 Визуализатор Алгоритмов Шифрования</h1>
+            <p class="subtitle">Пошаговая визуализация работы Caesar, AES и RSA</p>
+        </header>
+
+        <!-- Меню выбора алгоритма -->
+        <nav class="algo-menu">
+            <button class="algo-btn active" data-algo="caesar">
+                <span class="icon">📝</span>
+                <span>Caesar</span>
+            </button>
+            <button class="algo-btn" data-algo="aes">
+                <span class="icon">🔒</span>
+                <span>AES</span>
+            </button>
+            <button class="algo-btn" data-algo="rsa">
+                <span class="icon">🔑</span>
+                <span>RSA</span>
+            </button>
+        </nav>
+
+        <!-- CAESAR CIPHER SECTION -->
+        <section class="algo-section active" id="caesar-section">
+            <div class="section-header">
+                <h2>📝 Шифр Цезаря</h2>
+                <div class="algo-description">
+                    <p><strong>Описание:</strong> Каждая буква смещается на фиксированное количество позиций в алфавите.</p>
+                    <p><strong>Ключ:</strong> Смещение (обычно 3)</p>
+                    <p><strong>Стойкость:</strong> Очень низкая - всего 26 вариантов</p>
+                    <p><strong>Пример:</strong> A → D, B → E, C → F (при смещении 3)</p>
+                </div>
+            </div>
+
+            <div class="controls">
+                <input type="text" id="caesar-input" placeholder="Введите текст..." value="Hello World">
+                <div class="control-group">
+                    <label for="caesar-shift">Смещение:</label>
+                    <input type="number" id="caesar-shift" min="1" max="25" value="3">
+                </div>
+                <button class="btn btn-primary" onclick="encryptCaesar()">Шифровать</button>
+                <button class="btn btn-secondary" onclick="decryptCaesar()">Расшифровать</button>
+            </div>
+
+            <div class="result-area">
+                <div class="result-section" id="caesar-encrypted">
+                    <h3>Результат:</h3>
+                    <div class="result-box" id="caesar-result">-</div>
+                </div>
+
+                <div class="steps-area">
+                    <h3>Пошаговое преобразование:</h3>
+                    <div class="steps-container" id="caesar-steps">
+                        <div class="step">Введите текст и нажмите "Шифровать"</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- AES CIPHER SECTION -->
+        <section class="algo-section" id="aes-section">
+            <div class="section-header">
+                <h2>🔒 AES (Advanced Encryption Standard)</h2>
+                <div class="algo-description">
+                    <p><strong>Описание:</strong> Симметричный алгоритм - один ключ для шифрования и расшифрования.</p>
+                    <p><strong>Размер ключа:</strong> 256 бит</p>
+                    <p><strong>Размер блока:</strong> 128 бит</p>
+                    <p><strong>Стойкость:</strong> Очень высокая - стандарт для защиты данных</p>
+                    <p><strong>Использование:</strong> Защита файлов, конфиденциальная переписка</p>
+                </div>
+            </div>
+
+            <div class="controls">
+                <input type="text" id="aes-input" placeholder="Введите текст..." value="Secret Message">
+                <input type="password" id="aes-password" placeholder="Введите пароль..." value="mypassword">
+                <button class="btn btn-primary" onclick="encryptAES()">Шифровать</button>
+                <button class="btn btn-secondary" onclick="showDecryptAES()">Расшифровать</button>
+            </div>
+
+            <div id="aes-decrypt-panel" style="display: none;">
+                <div class="controls">
+                    <input type="text" id="aes-encrypted-input" placeholder="Введите зашифрованный текст...">
+                    <input type="password" id="aes-decrypt-password" placeholder="Введите пароль...">
+                    <button class="btn btn-secondary" onclick="decryptAES()">Расшифровать</button>
+                </div>
+            </div>
+
+            <div class="result-area">
+                <div class="result-section">
+                    <h3>Результат шифрования:</h3>
+                    <div class="result-box" id="aes-result">-</div>
+                    <button class="btn-copy" onclick="copyToClipboard('aes-result')">Копировать</button>
+                </div>
+
+                <div class="steps-area">
+                    <h3>Процесс шифрования:</h3>
+                    <div class="steps-container" id="aes-steps">
+                        <div class="step">Введите текст и пароль, затем нажмите "Шифровать"</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- RSA CIPHER SECTION -->
+        <section class="algo-section" id="rsa-section">
+            <div class="section-header">
+                <h2>🔑 RSA (Rivest-Shamir-Adleman)</h2>
+                <div class="algo-description">
+                    <p><strong>Описание:</strong> Асимметричный алгоритм - разные ключи для шифрования и расшифрования.</p>
+                    <p><strong>Открытый ключ:</strong> Используется для шифрования и проверки подписей</p>
+                    <p><strong>Секретный ключ:</strong> Используется для расшифрования и подписи документов</p>
+                    <p><strong>Размер ключа:</strong> Минимум 2048 бит (рекомендуется 4096)</p>
+                    <p><strong>Использование:</strong> Цифровые подписи, обмен ключами, HTTPS</p>
+                </div>
+            </div>
+
+            <div class="controls">
+                <div class="control-group">
+                    <label for="rsa-key-size">Размер ключа:</label>
+                    <select id="rsa-key-size">
+                        <option value="1024">1024 бит (небезопасно)</option>
+                        <option value="2048" selected>2048 бит (стандарт)</option>
+                        <option value="4096">4096 бит (очень безопасно)</option>
+                    </select>
+                </div>
+                <button class="btn btn-primary" onclick="generateRSAKeys()">Сгенерировать ключи</button>
+            </div>
+
+            <div id="rsa-encrypt-panel" style="display: none;">
+                <div class="controls">
+                    <input type="text" id="rsa-input" placeholder="Введите текст..." value="Secret">
+                    <button class="btn btn-primary" onclick="encryptRSA()">Шифровать</button>
+                </div>
+
+                <div class="result-area">
+                    <div class="result-section">
+                        <h3>Результат шифрования:</h3>
+                        <div class="result-box result-box-mono" id="rsa-result">-</div>
+                        <button class="btn-copy" onclick="copyToClipboard('rsa-result')">Копировать</button>
+                    </div>
+
+                    <div class="steps-area">
+                        <h3>Процесс:</h3>
+                        <div class="steps-container" id="rsa-steps">
+                            <div class="step">Ключи не сгенерированы</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Информационная панель -->
+        <section class="info-section">
+            <h2>ℹ️ Сравнение алгоритмов</h2>
+            <div class="comparison-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Параметр</th>
+                            <th>Caesar</th>
+                            <th>AES</th>
+                            <th>RSA</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Тип</strong></td>
+                            <td>Подстановка</td>
+                            <td>Симметричный</td>
+                            <td>Асимметричный</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Ключей</strong></td>
+                            <td>1 (общий)</td>
+                            <td>1 (общий)</td>
+                            <td>2 (открытый + секретный)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Стойкость</strong></td>
+                            <td>🔴 Очень низкая</td>
+                            <td>🟢 Очень высокая</td>
+                            <td>🟢 Очень высокая</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Скорость</strong></td>
+                            <td>🟢 Очень быстро</td>
+                            <td>🟢 Быстро</td>
+                            <td>🔴 Медленно</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Применение</strong></td>
+                            <td>Только обучение</td>
+                            <td>Защита данных</td>
+                            <td>Цифровые подписи</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Практические советы -->
+        <section class="tips-section">
+            <h2>💡 Практические советы</h2>
+            <div class="tips-grid">
+                <div class="tip-card">
+                    <h3>🚫 Caesar - Не используйте!</h3>
+                    <p>Исторический интерес только. Легко подбирается перебором всех 26 вариантов за секунду.</p>
+                </div>
+                <div class="tip-card">
+                    <h3>✅ AES - Используйте для защиты данных</h3>
+                    <p>Стандарт NIST. Используйте для шифрования файлов, базы данных, конфиденциальной переписки.</p>
+                </div>
+                <div class="tip-card">
+                    <h3>🔐 RSA - Используйте для подписей</h3>
+                    <p>Используйте для цифровых подписей, обмена ключами AES, HTTPS сертификатов.</p>
+                </div>
+                <div class="tip-card">
+                    <h3>🔑 Управление ключами</h3>
+                    <p>Никогда не передавайте секретные ключи. Используйте надежные пароли для AES. Храните ключи безопасно.</p>
+                </div>
+                <div class="tip-card">
+                    <h3>🛡️ Best Practices</h3>
+                    <p>Комбинируйте RSA для обмена ключами + AES для шифрования данных. Используйте минимум 2048 бит для RSA.</p>
+                </div>
+                <div class="tip-card">
+                    <h3>🔍 Хеширование</h3>
+                    <p>Для паролей используйте bcrypt/Argon2, а не AES. Для проверки целостности - SHA256.</p>
+                </div>
+            </div>
+        </section>
+
+        <footer class="footer">
+            <p>© 2026 Визуализатор Алгоритмов Шифрования | Создано для обучения</p>
+        </footer>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

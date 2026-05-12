@@ -1,0 +1,634 @@
+/* ==================== ОБЩИЕ СТИЛИ ==================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary: #6366f1;
+    --secondary: #ec4899;
+    --success: #10b981;
+    --danger: #ef4444;
+    --warning: #f59e0b;
+    --dark: #1f2937;
+    --gray: #6b7280;
+    --light: #f3f4f6;
+    --bg: #ffffff;
+    --border: #e5e7eb;
+    --shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: var(--dark);
+    line-height: 1.6;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* ==================== ЗАГОЛОВОК ==================== */
+.header {
+    text-align: center;
+    color: white;
+    margin-bottom: 40px;
+    animation: slideDown 0.6s ease-out;
+}
+
+.header h1 {
+    font-size: 3rem;
+    font-weight: 800;
+    margin-bottom: 10px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.subtitle {
+    font-size: 1.3rem;
+    opacity: 0.95;
+    font-weight: 300;
+}
+
+/* ==================== МЕНЮ АЛГОРИТМОВ ==================== */
+.algo-menu {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+}
+
+.algo-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 24px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    border-radius: 50px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+}
+
+.algo-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.5);
+    transform: translateY(-2px);
+}
+
+.algo-btn.active {
+    background: white;
+    color: var(--primary);
+    border-color: white;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+.algo-btn .icon {
+    font-size: 1.3rem;
+}
+
+/* ==================== СЕКЦИИ ==================== */
+.algo-section {
+    background: var(--bg);
+    border-radius: 15px;
+    padding: 40px;
+    margin-bottom: 30px;
+    box-shadow: var(--shadow);
+    display: none;
+    animation: fadeIn 0.4s ease-in;
+}
+
+.algo-section.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ==================== ЗАГОЛОВКИ СЕКЦИЙ ==================== */
+.section-header h2 {
+    font-size: 2rem;
+    color: var(--primary);
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.algo-description {
+    background: var(--light);
+    padding: 20px;
+    border-radius: 10px;
+    border-left: 4px solid var(--primary);
+    margin-bottom: 25px;
+}
+
+.algo-description p {
+    margin: 10px 0;
+    color: var(--dark);
+}
+
+.algo-description strong {
+    color: var(--primary);
+}
+
+/* ==================== КОНТРОЛЫ ==================== */
+.controls {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 25px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="number"],
+select {
+    flex: 1;
+    min-width: 200px;
+    padding: 12px 15px;
+    border: 2px solid var(--border);
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    font-family: 'Courier New', monospace;
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="number"]:focus,
+select:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+}
+
+.control-group {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.control-group label {
+    font-weight: 600;
+    color: var(--dark);
+    white-space: nowrap;
+}
+
+.control-group input,
+.control-group select {
+    min-width: 100px;
+    flex: 1;
+}
+
+/* ==================== КНОПКИ ==================== */
+.btn {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
+}
+
+.btn:active {
+    transform: translateY(0);
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+    color: white;
+}
+
+.btn-primary:hover {
+    filter: brightness(1.1);
+}
+
+.btn-secondary {
+    background: linear-gradient(135deg, var(--gray) 0%, #475569 100%);
+    color: white;
+}
+
+.btn-secondary:hover {
+    filter: brightness(1.1);
+}
+
+.btn-copy {
+    padding: 8px 16px;
+    background: var(--light);
+    border: 2px solid var(--border);
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    color: var(--primary);
+    transition: all 0.3s ease;
+}
+
+.btn-copy:hover {
+    background: var(--primary);
+    color: white;
+    border-color: var(--primary);
+}
+
+/* ==================== РЕЗУЛЬТАТЫ ==================== */
+.result-area {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 25px;
+    margin-top: 30px;
+}
+
+@media (max-width: 768px) {
+    .result-area {
+        grid-template-columns: 1fr;
+    }
+}
+
+.result-section {
+    background: var(--light);
+    padding: 20px;
+    border-radius: 10px;
+    border: 2px solid var(--border);
+}
+
+.result-section h3 {
+    color: var(--primary);
+    margin-bottom: 12px;
+    font-size: 1.1rem;
+}
+
+.result-box {
+    background: white;
+    padding: 15px;
+    border-radius: 8px;
+    border: 2px solid var(--border);
+    font-family: 'Courier New', monospace;
+    word-break: break-all;
+    white-space: pre-wrap;
+    max-height: 200px;
+    overflow-y: auto;
+    min-height: 50px;
+    color: var(--dark);
+    line-height: 1.5;
+}
+
+.result-box-mono {
+    font-family: 'Courier New', monospace;
+    font-size: 0.9rem;
+}
+
+.result-section .btn-copy {
+    margin-top: 12px;
+    width: 100%;
+    text-align: center;
+}
+
+/* ==================== ШАГИ ==================== */
+.steps-area {
+    background: var(--light);
+    padding: 20px;
+    border-radius: 10px;
+    border: 2px solid var(--border);
+}
+
+.steps-area h3 {
+    color: var(--primary);
+    margin-bottom: 15px;
+    font-size: 1.1rem;
+}
+
+.steps-container {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.step {
+    background: white;
+    padding: 15px;
+    border-radius: 8px;
+    border-left: 4px solid var(--primary);
+    animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.step.highlighted {
+    border-left-color: var(--warning);
+    background: rgba(245, 158, 11, 0.05);
+}
+
+.step strong {
+    color: var(--primary);
+}
+
+.step-number {
+    display: inline-block;
+    background: var(--primary);
+    color: white;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 30px;
+    font-weight: bold;
+    margin-right: 10px;
+    font-size: 0.9rem;
+}
+
+.step-content {
+    margin-top: 8px;
+    padding: 10px;
+    background: rgba(99, 102, 241, 0.05);
+    border-radius: 6px;
+}
+
+.char-transition {
+    display: inline-block;
+    background: rgba(99, 102, 241, 0.1);
+    padding: 2px 6px;
+    border-radius: 4px;
+    margin: 0 4px;
+    font-family: 'Courier New', monospace;
+    font-weight: bold;
+}
+
+/* ==================== ТАБЛИЦА СРАВНЕНИЯ ==================== */
+.info-section {
+    background: var(--bg);
+    border-radius: 15px;
+    padding: 40px;
+    margin-bottom: 30px;
+    box-shadow: var(--shadow);
+}
+
+.info-section h2 {
+    font-size: 2rem;
+    color: var(--primary);
+    margin-bottom: 25px;
+    text-align: center;
+}
+
+.comparison-table {
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+}
+
+table thead {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+    color: white;
+}
+
+table th {
+    padding: 15px;
+    text-align: left;
+    font-weight: 600;
+    font-size: 1.05rem;
+}
+
+table td {
+    padding: 15px;
+    border-bottom: 1px solid var(--border);
+}
+
+table tbody tr:hover {
+    background: var(--light);
+}
+
+table tbody tr:nth-child(even) {
+    background: rgba(243, 244, 246, 0.5);
+}
+
+/* ==================== СОВЕТЫ ==================== */
+.tips-section {
+    background: var(--bg);
+    border-radius: 15px;
+    padding: 40px;
+    margin-bottom: 30px;
+    box-shadow: var(--shadow);
+}
+
+.tips-section h2 {
+    font-size: 2rem;
+    color: var(--primary);
+    margin-bottom: 25px;
+    text-align: center;
+}
+
+.tips-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.tip-card {
+    background: linear-gradient(135deg, var(--light) 0%, rgba(243, 244, 246, 0.8) 100%);
+    padding: 25px;
+    border-radius: 12px;
+    border: 2px solid var(--border);
+    transition: all 0.3s ease;
+    border-left: 5px solid var(--primary);
+}
+
+.tip-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+    border-left-color: var(--secondary);
+}
+
+.tip-card h3 {
+    color: var(--primary);
+    margin-bottom: 10px;
+    font-size: 1.1rem;
+}
+
+.tip-card p {
+    color: var(--gray);
+    line-height: 1.6;
+}
+
+/* ==================== ПОДВАЛ ==================== */
+.footer {
+    text-align: center;
+    color: white;
+    padding: 25px;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    margin-top: 40px;
+    font-size: 0.95rem;
+}
+
+/* ==================== ДОПОЛНИТЕЛЬНЫЕ ПАНЕЛИ ==================== */
+#aes-decrypt-panel {
+    animation: slideDown 0.3s ease-out;
+}
+
+#rsa-encrypt-panel {
+    animation: slideDown 0.3s ease-out;
+}
+
+/* ==================== СКРОЛБАР ==================== */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--light);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--primary);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--secondary);
+}
+
+/* ==================== ОТЗЫВЧИВОСТЬ ==================== */
+@media (max-width: 768px) {
+    .header h1 {
+        font-size: 2rem;
+    }
+
+    .algo-section {
+        padding: 20px;
+    }
+
+    .controls {
+        flex-direction: column;
+    }
+
+    input[type="text"],
+    input[type="password"],
+    input[type="number"],
+    select {
+        width: 100%;
+    }
+
+    .btn {
+        width: 100%;
+    }
+
+    .result-area {
+        grid-template-columns: 1fr;
+    }
+
+    .algo-menu {
+        gap: 10px;
+    }
+
+    .algo-btn {
+        padding: 10px 16px;
+        font-size: 0.9rem;
+    }
+
+    .algo-btn .icon {
+        font-size: 1.1rem;
+    }
+
+    .tips-grid {
+        grid-template-columns: 1fr;
+    }
+
+    table {
+        font-size: 0.9rem;
+    }
+
+    table th,
+    table td {
+        padding: 10px;
+    }
+}
+
+/* ==================== АНИМАЦИИ ЗАГРУЗКИ ==================== */
+@keyframes pulse {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.5;
+    }
+}
+
+.loading {
+    animation: pulse 1.5s ease-in-out infinite;
+}
+
+/* ==================== ERROR STYLING ==================== */
+.error-message {
+    background: rgba(239, 68, 68, 0.1);
+    border: 2px solid var(--danger);
+    color: var(--danger);
+    padding: 15px;
+    border-radius: 8px;
+    margin-top: 10px;
+}
+
+.success-message {
+    background: rgba(16, 185, 129, 0.1);
+    border: 2px solid var(--success);
+    color: var(--success);
+    padding: 15px;
+    border-radius: 8px;
+    margin-top: 10px;
+}
